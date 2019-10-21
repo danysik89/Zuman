@@ -1,0 +1,72 @@
+<section class="wrap">
+  <h2 class="title">Beneficiaries</h2>
+  <h3 class="sub-title">Primary Beneficiaries</h3>
+
+  <form class="beneficiar" [formGroup]="form">
+    <div formArrayName="beneficiaries" *ngFor="let beneficiar of beneficiariesArray.controls; let i = index" >
+      <div [formGroupName]="i">
+        <div class="form-row">
+          <div class="form-group col">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" placeholder="Name" formControlName="name">
+          </div>
+          <div class="form-group col">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" placeholder="Date" formControlName="date">
+
+          </div>
+          <div class="form-group col">
+            <label class="form-label"></label>
+            <select class="form-control" formControlName="type">
+              <option value="1">option 1</option>
+              <option value="2">option 2</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <label class="form-label"></label>
+            <input type="text" class="form-control" placeholder="Optional" formControlName="optional">
+          </div>
+          <div class="form-group col">
+            <label class="form-label">Relationship</label>
+            <select class="form-control" formControlName="relationShip">
+              <option value="1">option 1</option>
+              <option value="2">option 2</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <label class="form-label"></label>
+            <input type="number" class="form-control" placeholder="0%" min="0" max="100" formControlName="amount">
+          </div>
+          <div class="actions" *ngIf="beneficiariesArray.controls[i].valid">
+            <span 
+                class="remove actions__item" 
+                *ngIf="beneficiariesArray.value.length !== 1"
+                (click)="removeBeneficiar(i)">
+              <i class='uil uil-times'></i>
+            </span>
+            <span 
+                class="add actions__item"
+                *ngIf="(beneficiariesArray.value.length === (i+1)) && (total !== 100)"
+                (click)="addBeneficiar()">
+              <i class="uil uil-check" ></i>
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="total < 100" class="alert alert-warning" role="alert">
+    primary total: {{total}}%
+  </div>
+  <div *ngIf="total === 100" class="alert alert-success" role="alert">
+    primary total: 100%
+  </div>
+  <div class="next-step">
+    <p>
+      <b>Contingent Beneficiaries</b>
+    </p>
+    <button type="button" class="btn btn-primary" [disabled]="total < 100">Next</button>
+  </div>
+</section>
