@@ -20,7 +20,7 @@ steps:
     azureSubscription: 'Azure для учащихся(cb57a59e-6be1-47f5-807b-2d1a0907b998)'
     appType: 'webApp'
     WebAppName: 'dyplomchik'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/*.zip'
 
 - script: |
     npm install
